@@ -1,29 +1,33 @@
 import threading
 import time
 
+# https://www.youtube.com/watch?v=cdPZ1pJACMI
 
-def print_cube(num):
+def print_cube(num: int, res: list):
     """
     function to print cube of given num
     """
     time.sleep(2)
     print("Cube: {}".format(num * num * num))
-    return num * num * num
+    res.append(num * num * num)
 
 
-def print_square(num):
+def print_square(num:int, res: list):
     """
     function to print square of given num
     """
     time.sleep(5)
     print("Square: {}".format(num * num))
-    return num * num
+    res.append(num * num)
 
 
 if __name__ == '__main__':
+    # shared resource
+    result = []
+
     # creating thread
-    t1 = threading.Thread(target=print_square, args=(10,))
-    t2 = threading.Thread(target=print_cube, args=(10,))
+    t1 = threading.Thread(target=print_square, args=(10, result,))
+    t2 = threading.Thread(target=print_cube, args=(10, result,))
 
     # starting thread 1
     t1.start()
@@ -32,8 +36,12 @@ if __name__ == '__main__':
 
     # wait until thread 1 is completely executed
     t1.join()
+    print("t1 terminated")
     # wait until thread 2 is completely executed
     t2.join()
+    print("t2 terminated")
+
+    print("result: {}".format(result))
 
     # both threads completely executed
     print("Done!")
