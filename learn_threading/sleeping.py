@@ -2,7 +2,7 @@ import time
 import threading
 
 
-def do_something(seconds):
+def do_something(seconds: int) -> None:
     print("Sleeping {}s...".format(seconds))
     time.sleep(seconds)
     print("Done Sleeping...{}s".format(seconds))
