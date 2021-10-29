@@ -16,8 +16,11 @@ if __name__ == '__main__':
 
         my_futures = executor.map(do_something, my_args)  # return results by the order that they were started
 
-        for f in my_futures:
-            print(f)
+        for f in my_futures:  # join all threads
+            try:
+                print(f)  # exception will be raised when retrieving result
+            except Exception as e:
+                print(e)
 
     finish = time.perf_counter()
 
