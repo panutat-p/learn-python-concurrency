@@ -11,7 +11,7 @@ URLS = ['http://www.foxnews.com/',
 
 
 # Retrieve a single page and report the URL and contents
-def load_url(url, timeout):
+def load_url(url: str, timeout: int):
     with urllib.request.urlopen(url, timeout=timeout) as conn:
         return conn.read()
 
